@@ -1,5 +1,4 @@
 import React from 'react';
-import image1 from '../../../assets/portfolio/portfolio-1.jpg';
 import ItemPortfolioComponentStyles from './ItemPortfolio.styles';
 
 function ItemPortfolioComponent(props) {

@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 function MessageComponent() {
-
+    const [loading, setLoading] = useState(false);
+    const [isMessageSent, setMessageSent] = useState(false);
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
+        setLoading(true);
         try {
             await axios.post(`${process.env.REACT_APP_API_URL}/api/messages`, formData);
+            setMessageSent(true);
+            setLoading(false);
             console.log('Mensaje enviado exitosamente');
         } catch (error) {
             console.error('Error al enviar el mensaje:', error);
@@ -35,12 +41,24 @@ function MessageComponent() {
                     <label htmlFor="message">Mensaje</label>
                     <textarea className="form-control" name="message" rows="10" required></textarea>
                 </div>
-                <div className="my-3">
-                    <div className="loading">Loading</div>
-                    <div className="error-message"></div>
-                    <div className="sent-message">Tu mensaje ha sido enviado. ¡Gracias!</div>
+                {isMessageSent && (
+                    <div className="alert alert-success mt-3" role="alert">
+                        ¡Tu mensaje ha sido enviado correctamente! ¡Gracias!
+                    </div>
+                )}
+                <div className="text-center">
+                    {loading ?
+                        <Button type="submit">
+                            <Spinner
+                                as="span"
+                                animation="border"
+                                size="sm"
+                                role="status"
+                                aria-hidden="true"
+                            />
+                            <span className="visually-hidden">Loading...</span>
+                        </Button> : <button type="submit">Enviar Mensaje</button>}
                 </div>
-                <div className="text-center"><button type="submit">Enviar Mensaje</button></div>
             </form>
         </div>
     );

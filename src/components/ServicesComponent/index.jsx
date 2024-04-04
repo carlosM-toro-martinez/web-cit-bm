@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import logo1 from '../../assets/cursos/logo-ardu.png';
-import logo2 from '../../assets/cursos/logo-scratch.png';
-import logo3 from '../../assets/cursos/logo-roblox.jpg';
-import logo4 from '../../assets/cursos/logo-ev3-2.png';
 import ServicesComponentStyles from './ServicesComponent.styles';
 import axios from 'axios';
 import ItemServicesComponent from './ItemServicesComponent';
